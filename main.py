@@ -78,13 +78,14 @@ model = Ridge(alpha=alpha)
 model.fit(X_train, y_train)
 
 # Make predictions for the years 2016 to 2018 указание на даты прогноза.
-future_years = np.arange(2016, 2019).reshape(-1, 1)
+# Make predictions for the years 2022 to 2024 (change the range accordingly)
+future_years = np.arange(2022, 2025).reshape(-1, 1)
 predicted_losses_kg = model.predict(future_years)
 
 # Convert predicted losses from kilograms to tons
 predicted_losses_ton = predicted_losses_kg / 1000
 
-# Define real losses
+# Define real losses (adjust or replace with actual data if available)
 real_losses = [799, 797, 670]
 
 # Create a DataFrame with the predictions and real losses
@@ -97,13 +98,13 @@ predictions_df = pd.DataFrame({
 # Display the predictions with real losses
 print(predictions_df)
 
-# Plot the predicted and real losses with different colors for each year. отображение данных реальныых потерь и прогнозируемых
+# Plot the predicted and real losses with different colors for each year.
 plt.figure(figsize=(10, 6))
 plt.plot(predictions_df['year'], predictions_df['predicted_loss_quantity_ton'], marker='o', linestyle='-', color='blue', label='Predicted Loss')
-plt.plot(predictions_df['year'], predictions_df['real_loss_quantity'], linestyle='--', marker='o', color='blue', label='Real Loss (2016-2018)')
+plt.plot(predictions_df['year'], predictions_df['real_loss_quantity'], linestyle='--', marker='o', color='blue', label='Real Loss (2022-2024)')
 
 # Customize the plot
-plt.title('Predicted vs Real Losses for Wheat (2016-2018)')
+plt.title('Predicted vs Real Losses for Wheat (2022-2024)')
 plt.xlabel('Year')
 plt.ylabel('Loss Quantity (in tons)')
 plt.xticks(predictions_df['year'])
@@ -113,8 +114,5 @@ plt.legend()
 # Show the plot
 plt.show()
 
-# Revert the warning filter to default behavior Возврат фильтра предупреждений в значение по умолчанию.
+# Revert the warning filter to default behavior
 warnings.filterwarnings("default", category=UserWarning)
-
-
-
